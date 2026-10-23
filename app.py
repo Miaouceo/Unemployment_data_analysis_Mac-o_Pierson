@@ -76,11 +76,16 @@ except (OSError, ValueError, KeyError) as error:
     st.stop()
 
 with st.sidebar:
+    st.image("https://www.cfa-numia.fr/app/uploads/2022/01/logo-efrei-print-efrei-web.png", width=220)
+    st.markdown("## Bio-informatics 2026-2027 maceo.pierson@efrei.net [LinkedIn](https://www.linkedin.com/in/mac%C3%A9o-pierson-316476294/) [GitHub](https://github.com/Miaouceo/Unemployment_data_analysis_Mac-o_Pierson)")
     st.header("Explore the data")
     year = st.selectbox("Comparison year", [2012, 2017, 2023], index=2)
     regions = st.multiselect("Regions", sorted(jobs.region.unique()), default=sorted(jobs.region.unique()))
     st.caption("The year changes the KPIs, map and ranking. The trend keeps all three dates. The poverty appendix always uses 2023.")
-    st.info("These are census unemployment rates, not the official ILO unemployment rate.")
+    st.divider()
+    st.markdown("**Project credits**")
+    st.caption("Student project by Macéo PIERSON · EFREI · #EFREIDataStories2026")
+    st.markdown("Course taught by [Mano Joseph Mathew](https://www.linkedin.com/in/manomathew/).")
 
 if not regions:
     st.info("Select at least one region in the sidebar to explore the dashboard.")
@@ -118,6 +123,12 @@ fig.update_yaxes(rangemode="tozero")
 fig.add_vline(x=year, line_dash="dot", line_color="#777777")
 show_chart(fig, "Line chart of weighted unemployment in the selected regions at three census dates; the dotted line marks the comparison year.")
 st.caption("Only three observations are available. Connecting lines are a visual guide, not measured annual values.")
+with st.expander("Understanding the trend"):
+    st.write("Each point shows the combined unemployment rate for the selected regions. Regions with more active people contribute more to this rate.")
+    st.write(f"2012: **{totals.iloc[0].rate:.2f}%** · 2017: **{totals.iloc[1].rate:.2f}%** · 2023: **{totals.iloc[2].rate:.2f}%**.")
+    st.write(f"The change is **{totals.iloc[1].rate - totals.iloc[0].rate:+.2f} percentage points** from 2012 to 2017, "
+             f"then **{totals.iloc[2].rate - totals.iloc[1].rate:+.2f} points** from 2017 to 2023.")
+    st.write("A fall from 12% to 10% means a decrease of 2 percentage points. These three dates show the broad evolution, but cannot tell us when changes happened between observations or what caused them.")
 
 st.subheader(f"3. Regional differences · {year}")
 st.write(f"The gap between the highest and lowest selected region is **{highest.rate - lowest.rate:.2f} percentage points**.")
@@ -130,6 +141,9 @@ with left:
     fig.update_traces(marker_line_width=1, marker_line_color="#FFFFFF")
     show_chart(fig, f"Map of unemployment by selected metropolitan region in {year}. Darker blue indicates a higher rate; the scale stays fixed across years.")
     st.caption("Map: data.gouv.fr / IGN Admin Express, simplified 2026 boundaries. Unselected regions are not coloured.")
+    with st.expander("Reading the map"):
+        st.write("Darker blue means a higher unemployment rate. Hover over a region to see its name and exact value. The colour scale stays between 8% and 18% so that colours remain comparable when you change the year.")
+        st.write("The map helps locate regional differences. A larger area does not mean more unemployed people: the colour represents a percentage, not a population count. Unselected regions are hidden, not assigned a zero rate.")
 with right:
     ranking = current.sort_values("rate")
     fig = px.bar(ranking, x="rate", y="region", orientation="h", text="rate", labels=LABELS,
@@ -139,6 +153,11 @@ with right:
     fig.update_xaxes(range=[0, 20])
     fig.update_yaxes(title=None)
     show_chart(fig, f"Horizontal ranking of selected regions by unemployment in {year}, with exact rates printed beside each bar.")
+    with st.expander("Understanding the ranking"):
+        st.write(f"In **{year}**, **{highest.region}** has the highest selected rate (**{highest.rate:.2f}%**) "
+                 f"and **{lowest.region}** the lowest (**{lowest.rate:.2f}%**). "
+                 f"The gap is **{highest.rate - lowest.rate:.2f} percentage points**.")
+        st.write("The ranking includes only the selected regions. Rates let us compare regions of different population sizes, but they do not show the number of unemployed people. With one region selected, the highest and lowest rates are the same.")
 
 st.subheader("4. Small appendix · Poverty in 2023")
 st.write("**Do regions with higher unemployment also have higher poverty?** Each point represents one selected region.")
@@ -156,6 +175,14 @@ if len(appendix) >= 3 and appendix.rate.nunique() > 1 and appendix.poverty.nuniq
 else:
     st.caption("Select at least three regions with different rates to display a descriptive correlation.")
 st.caption("Poverty = share of people below 60% of the median standard of living. This appendix uses 2023, regardless of the comparison-year filter.")
+with st.expander("Understanding unemployment and poverty"):
+    st.write("Points further right have higher unemployment; points higher up have higher poverty. Hover over each point to identify the region. Both measures refer to 2023, so the comparison-year filter does not change this chart.")
+    st.write("A positive correlation means the two rates tend to rise together across regions. A value near zero means little linear association; a negative value means they tend to move in opposite directions. Each region counts equally in this calculation.")
+    if "Corse" in regions:
+        corse = appendix[appendix.region == "Corse"].iloc[0]
+        st.write(f"For example, **Corse** has **{corse.rate:.2f}% unemployment** and **{corse.poverty:.2f}% poverty**. "
+                 "This illustrates why a relatively low unemployment rate does not necessarily mean low poverty.")
+    st.write("The percentages use different populations: unemployment concerns active people, while poverty concerns people in ordinary households. Wages, household composition and living conditions would need further investigation. This chart alone cannot explain the differences or prove causation.")
 
 st.subheader("5. What can we take away?")
 st.write(f"For the selected regions, the overall rate moved from **{totals.iloc[0].rate:.2f}% in 2012** to **{totals.iloc[-1].rate:.2f}% in 2023**. "

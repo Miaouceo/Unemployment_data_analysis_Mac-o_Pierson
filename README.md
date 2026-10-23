@@ -53,3 +53,7 @@ These are census unemployment rates, which differ from the official ILO rate. On
 - `data/`: datasets and map boundaries.
 - `requirements.txt`: Python dependencies.
 - `STORYBOARD.md`: presentation and demo plan.
+
+This is my student project work at EFREI, completed for the course taught by [Mano Joseph Mathew](https://www.linkedin.com/in/manomathew/).
+
+**Macéo PIERSON** — [My LinkedIn](https://www.linkedin.com/in/mac%C3%A9o-pierson-316476294/)
