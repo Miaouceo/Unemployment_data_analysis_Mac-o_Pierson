@@ -1,0 +1,42 @@
+[
+  {
+    "file": "taux-de-chomage-au-sens-du-recensement-fields.csv",
+    "url": "https://static.data.gouv.fr/resources/taux-de-chomage-au-sens-du-recensement/20261014-133231/description-des-champs.csv",
+    "dataset": "https://www.data.gouv.fr/datasets/taux-de-chomage-au-sens-du-recensement",
+    "license": "odc-odbl",
+    "retrieved": "2026-10-23",
+    "sha256": "70ac4ce9fbc25c031d37e4ffb9cecf175b14310ddd7679fc61523c8624b4a518"
+  },
+  {
+    "file": "taux-de-chomage-au-sens-du-recensement-region.csv",
+    "url": "https://static.data.gouv.fr/resources/taux-de-chomage-au-sens-du-recensement/20261014-133230/taux-de-chomage-au-sens-du-recensement-region.csv",
+    "dataset": "https://www.data.gouv.fr/datasets/taux-de-chomage-au-sens-du-recensement",
+    "license": "odc-odbl",
+    "retrieved": "2026-10-23",
+    "sha256": "ea66bdf7b0515aa56df2ea69d6898d3266c441116d78e2c9c68e5dabb9116166"
+  },
+  {
+    "file": "taux-de-pauvrete-fields.csv",
+    "url": "https://static.data.gouv.fr/resources/taux-de-pauvrete/20261014-133212/description-des-champs.csv",
+    "dataset": "https://www.data.gouv.fr/datasets/taux-de-pauvrete",
+    "license": "odc-odbl",
+    "retrieved": "2026-10-23",
+    "sha256": "d5fb496893e7dd3d8b4ccb574cc6941c43ea42ab5add08d984b4587c623afd32"
+  },
+  {
+    "file": "taux-de-pauvrete-region.csv",
+    "url": "https://static.data.gouv.fr/resources/taux-de-pauvrete/20261014-133212/taux-de-pauvrete-region.csv",
+    "dataset": "https://www.data.gouv.fr/datasets/taux-de-pauvrete",
+    "license": "odc-odbl",
+    "retrieved": "2026-10-23",
+    "sha256": "04380298e32b49d20ed5e817e747791c14d569c83c484b3136c744b598458559"
+  },
+  {
+    "file": "regions.geojson",
+    "url": "https://etalab-datasets.geo.data.gouv.fr/contours-administratifs/2026/geojson/regions-1000m.geojson",
+    "dataset": "https://www.data.gouv.fr/datasets/contours-administratifs",
+    "license": "odc-odbl",
+    "retrieved": "2026-10-23",
+    "sha256": "2a48c8a4a38532053f07045e6d5a8ba0b1b6ff20d9d883f155ba9ea2abdbe685"
+  }
+]
