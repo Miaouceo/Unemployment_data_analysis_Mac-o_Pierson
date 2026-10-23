@@ -2,6 +2,8 @@
 
 **Macéo PIERSON — EFREI — #EFREIDataStories2026**
 
+Here is the link for the online streamlit : https://unemploymentdataanalysismac-opierson-j5rdctucbilxzqmzgpadez.streamlit.app/
+
 For this project, I built a simple Streamlit dashboard to explore unemployment in the 13 regions of metropolitan France. I compare 2012, 2017 and 2023, with a small section on poverty in 2023.
 
 The main question is: **How has unemployment changed, and what differences remain between regions?**
